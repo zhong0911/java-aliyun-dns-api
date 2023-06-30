@@ -27,22 +27,7 @@ public class DescribeDomainRecordInfo {
             DescribeDomainRecordInfoResponse response = client.describeDomainRecordInfoWithOptions(describeDomainRecordInfoRequest, runtime);
             DescribeDomainRecordInfoResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", responseBody.getRecordId());
-            info.put("domainId", responseBody.getDomainId());
-            info.put("domainName", responseBody.getDomainName());
-            info.put("groupId", responseBody.getGroupId());
-            info.put("groupName", responseBody.getGroupName());
-            info.put("line", responseBody.getLine());
-            info.put("locked", responseBody.getLocked());
-            info.put("priority", responseBody.getPriority());
-            info.put("punyCode", responseBody.getPunyCode());
-            info.put("RR", responseBody.getRR());
-            info.put("remark", responseBody.getRemark());
-            info.put("requestId", responseBody.getRequestId());
-            info.put("status", responseBody.getStatus());
-            info.put("TTL", responseBody.getTTL());
-            info.put("type", responseBody.getType());
-            info.put("value", responseBody.getValue());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

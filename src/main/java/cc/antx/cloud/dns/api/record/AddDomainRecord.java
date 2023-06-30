@@ -25,8 +25,7 @@ public class AddDomainRecord {
             AddDomainRecordResponse response = client.addDomainRecordWithOptions(addDomainRecordRequest, runtime);
             AddDomainRecordResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", responseBody.getRecordId());
-            info.put("requestId", responseBody.getRequestId());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

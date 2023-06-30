@@ -24,9 +24,7 @@ public class DeleteSubDomainRecords {
             DeleteSubDomainRecordsResponse response = client.deleteSubDomainRecordsWithOptions(deleteSubDomainRecordsRequest, runtime);
             DeleteSubDomainRecordsResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("requestId", responseBody.getRequestId());
-            info.put("RR", responseBody.getRR());
-            info.put("totalCount", responseBody.getTotalCount());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException teaException) {
             String code = teaException.getCode();

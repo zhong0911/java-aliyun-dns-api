@@ -26,11 +26,7 @@ public class DescribeRecordLogs {
             DescribeRecordLogsResponse response = client.describeRecordLogsWithOptions(describeRecordLogsRequest, runtime);
             DescribeRecordLogsResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("requestId",responseBody.getRequestId() );
-            info.put("totalCount",responseBody.getTotalCount() );
-            info.put("pageNumber", responseBody.getPageNumber());
-            info.put("pageSize", responseBody.getPageSize());
-            info.putAll(responseBody.getRecordLogs().toMap());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

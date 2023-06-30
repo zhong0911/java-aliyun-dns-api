@@ -2,13 +2,10 @@ package cc.antx.cloud.dns.api.line;
 
 import cc.antx.cloud.dns.api.Common;
 import cc.antx.cloud.dns.utils.Output;
-import com.alibaba.fastjson.JSON;
+import com.aliyun.tea.TeaException;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.alidns20150109.Client;
-import com.aliyun.alidns20150109.models.DescribeSupportLinesRequest;
-import com.aliyun.alidns20150109.models.DescribeSupportLinesResponse;
-import com.aliyun.alidns20150109.models.DescribeSupportLinesResponseBody;
-import com.aliyun.tea.TeaException;
+import com.aliyun.alidns20150109.models.*;
 import com.aliyun.teautil.models.RuntimeOptions;
 
 public class DescribeSupportLines {
@@ -26,8 +23,7 @@ public class DescribeSupportLines {
             DescribeSupportLinesResponse response = client.describeSupportLinesWithOptions(describeSupportLinesRequest, runtime);
             DescribeSupportLinesResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("requestId", responseBody.getRequestId());
-            info.putAll(responseBody.getRecordLines().toMap());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

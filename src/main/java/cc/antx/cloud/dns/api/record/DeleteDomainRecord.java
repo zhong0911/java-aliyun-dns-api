@@ -25,8 +25,7 @@ public class DeleteDomainRecord {
             DeleteDomainRecordResponse response = client.deleteDomainRecordWithOptions(deleteDomainRecordRequest, runtime);
             DeleteDomainRecordResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("recordId",   responseBody.getRecordId());
-            info.put("requestId",responseBody.getRequestId());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException teaException) {
             String code = teaException.getCode();

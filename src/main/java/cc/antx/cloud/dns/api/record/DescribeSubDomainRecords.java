@@ -24,11 +24,7 @@ public class DescribeSubDomainRecords {
             DescribeSubDomainRecordsResponse response = client.describeSubDomainRecordsWithOptions(describeSubDomainRecordsRequest, runtime);
             DescribeSubDomainRecordsResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("totalCount", responseBody.getTotalCount());
-            info.put("requestId", responseBody.getRequestId());
-            info.put("pageNumber", responseBody.getPageNumber());
-            info.put("pageSize", responseBody.getPageSize());
-            info.putAll(responseBody.getDomainRecords().toMap());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

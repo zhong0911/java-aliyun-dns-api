@@ -25,10 +25,7 @@ public class GetTxtRecordForVerify {
             GetTxtRecordForVerifyResponse response = client.getTxtRecordForVerifyWithOptions(getTxtRecordForVerifyRequest, runtime);
             GetTxtRecordForVerifyResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("domainName", responseBody.getDomainName());
-            info.put("RR", responseBody.getRR());
-            info.put("value", responseBody.getValue());
-            info.put("requestId", responseBody.getRequestId());
+            info.putAll(responseBody.toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

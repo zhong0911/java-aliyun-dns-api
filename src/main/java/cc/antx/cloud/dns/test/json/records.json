@@ -1,0 +1,116 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Operation succeeded",
+  "info": {
+    "pageNumber": 1,
+    "pageSize": 20,
+    "Record": [
+      {
+        "Line": "default",
+        "RR": "www",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "A",
+        "DomainName": "rwx.asia",
+        "Value": "0.0.0.0",
+        "RecordId": "837329278624865280",
+        "TTL": 600,
+        "Weight": 1
+      },
+      {
+        "Line": "default",
+        "RR": "asia",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "AAAA",
+        "DomainName": "rwx.asia",
+        "Value": "::1",
+        "RecordId": "837327318318340096",
+        "TTL": 600,
+        "Weight": 1
+      },
+      {
+        "Line": "default",
+        "RR": "default._domainkey",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "TXT",
+        "DomainName": "rwx.asia",
+        "Value": "v=DKIM1;k=rsa;p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDR8tAT0rKjEKlGJ+TdyD2ON51QGEBVmKctP7lesuHGIRCsQzZMiPfiTeDrHo05yizACPKq/E5UPr1l+J4+BKSg+Ek4pln096LzVZZEm5389zYzeilHvBFctVkhtaq/R7i37qksEPet6ZesAUH3R0MSW0axZZF+FBlJDycnGqq8LwIDAQAB",
+        "RecordId": "835864789534657536",
+        "TTL": 600
+      },
+      {
+        "Line": "default",
+        "RR": "_dmarc",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "TXT",
+        "DomainName": "rwx.asia",
+        "Value": "v=DMARC1;p=quarantine;rua=mailto:admin@rwx.asia",
+        "RecordId": "835864745840476160",
+        "TTL": 600
+      },
+      {
+        "Line": "default",
+        "RR": "s4",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "A",
+        "DomainName": "rwx.asia",
+        "Value": "120.26.196.136",
+        "RecordId": "835055492865214464",
+        "TTL": 600,
+        "Weight": 1
+      },
+      {
+        "Line": "default",
+        "RR": "@",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "TXT",
+        "DomainName": "rwx.asia",
+        "Value": "v=spf1 a mx ~all",
+        "RecordId": "834824981282577408",
+        "TTL": 600
+      },
+      {
+        "Line": "default",
+        "RR": "@",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "MX",
+        "DomainName": "rwx.asia",
+        "Priority": 10,
+        "Value": "mail.rwx.asia",
+        "RecordId": "834824896507280384",
+        "TTL": 600
+      },
+      {
+        "Line": "default",
+        "RR": "*",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "A",
+        "DomainName": "rwx.asia",
+        "Value": "103.146.231.32",
+        "RecordId": "834824871289019392",
+        "TTL": 600,
+        "Weight": 1
+      },
+      {
+        "Line": "default",
+        "RR": "@",
+        "Status": "ENABLE",
+        "Locked": false,
+        "Type": "A",
+        "DomainName": "rwx.asia",
+        "Value": "103.146.231.32",
+        "RecordId": "834824857105976320",
+        "TTL": 600,
+        "Weight": 1
+      }
+    ]
+  }
+}

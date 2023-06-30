@@ -9,9 +9,8 @@ import com.aliyun.alidns20150109.models.*;
 import com.aliyun.teautil.models.RuntimeOptions;
 
 public class UpdateDomainRecordRemark {
-
     /**
-     * 修改域名解析记录
+     * 修改域名解析记录的备注
      * 必填参数: recordId
      * 可选参数: remark
      *

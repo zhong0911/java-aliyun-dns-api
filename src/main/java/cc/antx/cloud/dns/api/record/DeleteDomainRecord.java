@@ -15,7 +15,7 @@ public class DeleteDomainRecord {
      * 必填参数: recordId
      *
      * @param params 参数
-     * @return 删除结果
+     * @return 记录删除结果
      */
     public static JSONObject deleteDomainRecord(JSONObject params) {
         try {

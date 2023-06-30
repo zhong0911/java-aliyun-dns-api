@@ -8,25 +8,29 @@ import com.aliyun.alidns20150109.models.*;
 import com.aliyun.tea.TeaException;
 import com.aliyun.teautil.models.RuntimeOptions;
 
-public class AddDomainRecord {
+
+public class DescribeRecordLogs {
 
     /**
-     * 根据传入参数添加解析记录
-     * 必填参数: domainName, RR, type, value
+     * 根据传入参数获取域名的解析操作日志
+     * 必填参数: domainName
      *
      * @param params 参数
-     * @return 记录添加结果
+     * @return 解析操作日志
      */
-    public static JSONObject addDomainRecord(JSONObject params) {
+    public static JSONObject describeRecordLogs(JSONObject params) {
         try {
             Client client = Common.createClient(System.getenv("ALIBABA_CLOUD_ACCESS_KEY_ID"), System.getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET"));
-            AddDomainRecordRequest addDomainRecordRequest = AddDomainRecordRequest.build(params);
+            DescribeRecordLogsRequest describeRecordLogsRequest = DescribeRecordLogsRequest.build(params);
             RuntimeOptions runtime = new RuntimeOptions();
-            AddDomainRecordResponse response = client.addDomainRecordWithOptions(addDomainRecordRequest, runtime);
-            AddDomainRecordResponseBody responseBody = response.getBody();
+            DescribeRecordLogsResponse response = client.describeRecordLogsWithOptions(describeRecordLogsRequest, runtime);
+            DescribeRecordLogsResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", responseBody.getRecordId());
-            info.put("requestId", responseBody.getRequestId());
+            info.put("requestId",responseBody.getRequestId() );
+            info.put("totalCount",responseBody.getTotalCount() );
+            info.put("pageNumber", responseBody.getPageNumber());
+            info.put("pageSize", responseBody.getPageSize());
+            info.putAll(responseBody.getRecordLogs().toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

@@ -16,7 +16,7 @@ public class DescribeDomainRecords {
      * 必填参数: domainName
      *
      * @param params 参数
-     * @return 解析记录值列表
+     * @return 解析记录列表
      */
     public static JSONObject describeDomainRecords(JSONObject params) {
         try {
@@ -25,9 +25,10 @@ public class DescribeDomainRecords {
             RuntimeOptions runtime = new RuntimeOptions();
             DescribeDomainRecordsResponse response = client.describeDomainRecordsWithOptions(describeDomainRecordsRequest, runtime);
             DescribeDomainRecordsResponseBody responseBody = response.getBody();
-            JSONObject info = new JSONObject(responseBody.getDomainRecords().toMap());
+            JSONObject info = new JSONObject(true);
             info.put("pageNumber", responseBody.getPageNumber());
             info.put("pageSize", responseBody.getPageSize());
+            info.putAll(responseBody.getDomainRecords().toMap());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();

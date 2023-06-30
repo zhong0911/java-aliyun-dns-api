@@ -14,7 +14,7 @@ public class DeleteSubDomainRecords {
      * 必填参数: domainName, RR
      *
      * @param params 参数
-     * @return 删除结果
+     * @return 记录删除结果
      */
     public static JSONObject deleteSubDomainRecords(JSONObject params) {
         try {

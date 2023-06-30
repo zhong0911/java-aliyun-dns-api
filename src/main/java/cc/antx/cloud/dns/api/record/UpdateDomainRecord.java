@@ -9,7 +9,6 @@ import com.aliyun.alidns20150109.models.*;
 import com.aliyun.teautil.models.RuntimeOptions;
 
 public class UpdateDomainRecord {
-
     /**
      * 修改域名解析记录
      * 必填参数: recordId, RR, type, value

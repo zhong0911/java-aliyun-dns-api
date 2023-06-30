@@ -38,5 +38,4 @@ public class GetTxtRecordForVerify {
             return Output.error(500, "ServerError", "Server Error");
         }
     }
-
 }

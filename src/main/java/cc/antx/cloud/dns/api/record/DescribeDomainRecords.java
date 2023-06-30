@@ -13,9 +13,7 @@ public class DescribeDomainRecords {
 
     /**
      * 获取解析记录列表
-     * 必填参数:
-     * 参数名        类型     介绍
-     * domainName   String   域名
+     * 必填参数: domainName
      *
      * @param params 参数
      * @return 解析记录值列表
@@ -36,7 +34,7 @@ public class DescribeDomainRecords {
             String message = error.getMessage();
             return Output.error(code, message);
         } catch (Exception exception) {
-            return Output.error("500", "Server Error");
+            return Output.error(500, "ServerError", "Server Error");
         }
     }
 }

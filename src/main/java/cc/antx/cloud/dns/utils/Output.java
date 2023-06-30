@@ -24,7 +24,16 @@ public class Output {
         return json;
     }
 
-    public static JSONObject error(String code , String message) {
+    public static JSONObject error(Integer status, String code, String message) {
+        JSONObject json = new JSONObject(true);
+        json.put("success", false);
+        json.put("status", status);
+        json.put("code", code);
+        json.put("message", message);
+        return json;
+    }
+
+    public static JSONObject error(String code, String message) {
         JSONObject json = new JSONObject(true);
         json.put("success", false);
         json.put("status", 400);

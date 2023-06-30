@@ -1,7 +1,6 @@
 package cc.antx.cloud.dns.api.record;
 
 
-import com.alibaba.fastjson.JSON;
 import com.aliyun.tea.TeaException;
 import cc.antx.cloud.dns.api.Common;
 import cc.antx.cloud.dns.utils.Output;
@@ -12,8 +11,11 @@ import com.aliyun.teautil.models.RuntimeOptions;
 
 public class DeleteDomainRecord {
     /**
-     * @param params
-     * @return
+     * 根据传入参数删除解析记录
+     * 必填参数: recordId
+     *
+     * @param params 参数
+     * @return 删除结果
      */
     public static JSONObject deleteDomainRecord(JSONObject params) {
         try {
@@ -22,25 +24,17 @@ public class DeleteDomainRecord {
             RuntimeOptions runtime = new RuntimeOptions();
             DeleteDomainRecordResponse response = client.deleteDomainRecordWithOptions(deleteDomainRecordRequest, runtime);
             DeleteDomainRecordResponseBody responseBody = response.getBody();
-            String recordId = responseBody.getRecordId();
-            String requestId = responseBody.getRequestId();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", recordId);
-            info.put("requestId", requestId);
+            info.put("recordId",   responseBody.getRecordId());
+            info.put("requestId",responseBody.getRequestId());
             return Output.success(info);
         } catch (TeaException teaException) {
             String code = teaException.getCode();
             String message = teaException.getMessage();
             return Output.error(code, message);
         } catch (Exception exception) {
-            return Output.error("500", "Server Error");
+            return Output.error(500, "ServerError", "Server Error");
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("recordId", "837329278624865280");
-        System.out.println(deleteDomainRecord(jsonObject));
     }
 }
 

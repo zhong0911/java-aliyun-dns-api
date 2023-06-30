@@ -12,12 +12,7 @@ public class UpdateDomainRecord {
 
     /**
      * 修改域名解析记录
-     * 必填参数:
-     * 参数名        类型    介绍
-     * recordId    String   记录ID
-     * RR          String   主机记录
-     * type        String   解析记录类型
-     * value       String   记录值
+     * 必填参数: recordId, RR, type, value
      *
      * @param params 参数
      * @return 修改结果
@@ -29,18 +24,16 @@ public class UpdateDomainRecord {
             RuntimeOptions runtime = new RuntimeOptions();
             UpdateDomainRecordResponse response = client.updateDomainRecordWithOptions(updateDomainRecordRequest, runtime);
             UpdateDomainRecordResponseBody responseBody = response.getBody();
-            String recordId = responseBody.getRecordId();
-            String requestId = responseBody.getRequestId();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", recordId);
-            info.put("requestId", requestId);
+            info.put("recordId", responseBody.getRecordId());
+            info.put("requestId", responseBody.getRequestId());
             return Output.success(info);
         } catch (TeaException error) {
             String code = error.getCode();
             String message = error.getMessage();
             return Output.error(code, message);
         } catch (Exception exception) {
-            return Output.error("500", "Server Error");
+            return Output.error(500, "ServerError", "Server Error");
         }
     }
 }

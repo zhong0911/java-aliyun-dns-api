@@ -8,29 +8,29 @@ import com.aliyun.alidns20150109.models.*;
 import com.aliyun.tea.TeaException;
 import com.aliyun.teautil.models.RuntimeOptions;
 
-public class AddDomainRecord {
-
+public class DeleteSubDomainRecords {
     /**
-     * 根据传入参数添加解析记录
-     * 必填参数: domainName, RR, type, value
+     * 根据传入参数删除主机记录对应的解析记录
+     * 必填参数: domainName, RR
      *
      * @param params 参数
-     * @return 记录值添加结果
+     * @return 删除结果
      */
-    public static JSONObject addDomainRecord(JSONObject params) {
+    public static JSONObject deleteSubDomainRecords(JSONObject params) {
         try {
             Client client = Common.createClient(System.getenv("ALIBABA_CLOUD_ACCESS_KEY_ID"), System.getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET"));
-            AddDomainRecordRequest addDomainRecordRequest = AddDomainRecordRequest.build(params);
+            DeleteSubDomainRecordsRequest deleteSubDomainRecordsRequest = DeleteSubDomainRecordsRequest.build(params);
             RuntimeOptions runtime = new RuntimeOptions();
-            AddDomainRecordResponse response = client.addDomainRecordWithOptions(addDomainRecordRequest, runtime);
-            AddDomainRecordResponseBody responseBody = response.getBody();
+            DeleteSubDomainRecordsResponse response = client.deleteSubDomainRecordsWithOptions(deleteSubDomainRecordsRequest, runtime);
+            DeleteSubDomainRecordsResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
-            info.put("recordId", responseBody.getRecordId());
             info.put("requestId", responseBody.getRequestId());
+            info.put("RR", responseBody.getRR());
+            info.put("totalCount", responseBody.getTotalCount());
             return Output.success(info);
-        } catch (TeaException error) {
-            String code = error.getCode();
-            String message = error.getMessage();
+        } catch (TeaException teaException) {
+            String code = teaException.getCode();
+            String message = teaException.getMessage();
             return Output.error(code, message);
         } catch (Exception exception) {
             return Output.error(500, "ServerError", "Server Error");

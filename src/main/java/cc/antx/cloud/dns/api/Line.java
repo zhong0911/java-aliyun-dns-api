@@ -1,29 +1,26 @@
-package cc.antx.cloud.dns.api.record;
+package cc.antx.cloud.dns.api;
 
-import com.aliyun.tea.TeaException;
-import cc.antx.cloud.dns.api.Common;
 import cc.antx.cloud.dns.utils.Output;
+import com.aliyun.tea.TeaException;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.alidns20150109.Client;
 import com.aliyun.alidns20150109.models.*;
 import com.aliyun.teautil.models.RuntimeOptions;
 
-public class UpdateDomainRecordRemark {
+public class Line {
     /**
-     * 修改域名解析记录的备注
-     * 必填参数: recordId
-     * 可选参数: remark
+     * 查询云解析支持的所有线路列表
+     * 无必填参数
      *
-     * @param params 参数
-     * @return 修改结果
+     * @return 线路列表
      */
-    public static JSONObject updateDomainRecordRemark(JSONObject params) {
+    public static JSONObject describeSupportLines(JSONObject params) {
         try {
             Client client = Common.createClient(System.getenv("ALIBABA_CLOUD_ACCESS_KEY_ID"), System.getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET"));
-            UpdateDomainRecordRemarkRequest updateDomainRecordRemarkRequest = UpdateDomainRecordRemarkRequest.build(params);
+            DescribeSupportLinesRequest describeSupportLinesRequest = DescribeSupportLinesRequest.build(params);
             RuntimeOptions runtime = new RuntimeOptions();
-            UpdateDomainRecordRemarkResponse response = client.updateDomainRecordRemarkWithOptions(updateDomainRecordRemarkRequest, runtime);
-            UpdateDomainRecordRemarkResponseBody responseBody = response.getBody();
+            DescribeSupportLinesResponse response = client.describeSupportLinesWithOptions(describeSupportLinesRequest, runtime);
+            DescribeSupportLinesResponseBody responseBody = response.getBody();
             JSONObject info = new JSONObject(true);
             info.putAll(responseBody.toMap());
             return Output.success(info);

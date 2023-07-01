@@ -1,6 +1,6 @@
 package cc.antx.cloud.dns.controller.api.domain;
 
-import cc.antx.cloud.dns.api.domain.DescribeDomains;
+import cc.antx.cloud.dns.api.Domain;
 import cc.antx.cloud.dns.controller.Common;
 import cc.antx.cloud.dns.utils.Output;
 import com.alibaba.fastjson.JSONObject;
@@ -22,7 +22,7 @@ public class DomainController {
             HttpServletRequest request,
             HttpServletResponse response,
             @RequestParam Map<String, String> allParams
-            ) throws IOException {
+    ) throws IOException {
         PrintWriter writer = response.getWriter();
         if (!Common.checkLoginStatus(request))
             writer.write(String.valueOf(Output.error("No logged in")));
@@ -37,7 +37,23 @@ public class DomainController {
                 action = action.toLowerCase();
                 switch (action) {
                     case "describedomains": {
-                        result = DescribeDomains.describeDomains(params);
+                        result = Domain.describeDomains(params);
+                        break;
+                    }
+                    case "describedomainns": {
+                        result = Domain.describeDomainNs(params);
+                        break;
+                    }
+                    case "describedomaininfo": {
+                        result = Domain.describeDomainInfo(params);
+                        break;
+                    }
+                    case "adddomain": {
+                        result = Domain.addDomain(params);
+                        break;
+                    }
+                    case "deletedomain": {
+                        result = Domain.deleteDomain(params);
                         break;
                     }
                     default: {

@@ -1,16 +1,28 @@
-let _describeDomainsRes = {};
-
 function describeDomains(params) {
-    params.action = "describeDomains";
+    return postAPI("describeDomains", params)
+}
+
+function addDomain(params) {
+    return postAPI("addDomain", params);
+}
+
+function deleteDomain(params) {
+    return postAPI("deleteDomain", params);
+}
+
+
+let _result = {};
+function postAPI(action, params) {
+    params.action = action;
     $.ajax({
         url: "/api/domain",
         data: params,
         dataType: "json",
         async: false,
         success: function (data) {
-            _describeDomainsRes = data;
+            _result = data;
             console.log(data);
         }
     });
-    return _describeDomainsRes;
+    return _result;
 }

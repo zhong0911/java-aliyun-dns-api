@@ -12,12 +12,12 @@ public class Common {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password");
-        String salt = (String) session.getAttribute("salt");
-        if (username == null || password == null || salt == null || username.isEmpty() || password.isEmpty() || salt.isEmpty())
+        if (username == null || password == null || username.isEmpty() || password.isEmpty())
             return false;
         else {
             Account account = AccountMapper.getAccountByUsername(username);
-            return StringUtils.getStringSHA512(account.getSalt().concat(account.getPassword())).equals(StringUtils.getStringSHA512(salt.concat(password)));
+            return StringUtils.getStringSHA512(account.getSalt().concat(account.getPassword()))
+                    .equals(StringUtils.getStringSHA512(account.getSalt().concat(password)));
         }
     }
 }

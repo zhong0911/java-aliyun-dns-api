@@ -19,13 +19,14 @@ const App = {
     },
     methods: {
         checkNS(domainName) {
-            let res = describeDomainNs({domainName: domainName});
-            let expectDnsServers = res['ExpectDnsServers']['ExpectDnsServer'];
-            let dnsServers = res['DnsServers']['DnsServers'];
-            return expectDnsServers === dnsServers
+            if (checkDomainNs(domainName)) {
+                return `<img src="https://image.antx.cc/svg/right-ok.svg" alt="" width="16" height="16"> <span class="text-danger">正常</span>`;
+            } else {
+                return `<img src="https://image.antx.cc/svg/warning.svg" alt="" width="16" height="16"> <span class="text-warning">未使用系统分配DNS地址</span>`;
+            }
         },
         checkDomain() {
-            checkDomain();
+            return checkDomain();
         },
         addDomain() {
             $("#add-domain-modal").modal("show").on('hidden.bs.modal', function () {
@@ -55,6 +56,7 @@ const App = {
         },
     }
 }
+
 Vue.createApp(App).mount('#app');
 
 
@@ -120,4 +122,13 @@ function submitDeleteDomain() {
     } else {
         $prompt.error('删除失败');
     }
+}
+
+function checkDomainNs(domainName) {
+    let res = describeDomainNs({domainName: domainName});
+    if (res['success']) {
+        let expectDnsServers = res['info']['ExpectDnsServers']['ExpectDnsServer'];
+        let dnsServers = res['info']['DnsServers']['DnsServer'];
+        return expectDnsServers.every(server => dnsServers.includes(server));
+    } else return false;
 }

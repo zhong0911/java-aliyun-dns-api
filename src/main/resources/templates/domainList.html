@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Antx Cloud - 域名解析列表</title>
@@ -36,17 +36,16 @@
                         <a class="nav-link active" data-bs-toggle="tab" href="#domains">域名解析</a>
                     </li>
                 </ul>
-
             </nav>
             <div class="tab-content">
                 <div id="domains" class="mt-3 tab-pane active">
-                    <div class="container mt-3">
+                    <div class="mt-3">
                         <h2>域名解析</h2>
                         <div class="mt-4" id="options">
                             <button @click="addDomain" class="btn btn-sm btn-primary" id="add-domain">添加域名</button>
                         </div>
-                        <div class="table-responsive-sm mt-2">
-                            <table class="table table-bordered small table-hover">
+                        <div class="mt-2">
+                            <table class="table small table-bordered">
                                 <thead>
                                 <tr>
                                     <th>域名</th>
@@ -63,13 +62,15 @@
                                            :href="'/dns/record/' + item['DomainName']"><small>{{ item['DomainName']}}</small></a>
                                     </td>
                                     <td>
-                                        <small>{{ item['Tags']['Tag'] }}</small>
+                                        <small><a class="text-decoration-none" href="javascript:void(0)"><img
+                                                src="https://image.antx.cc/svg/tag.svg" alt="" width="16"
+                                                height="16"></a></small>
                                     </td>
                                     <td>
                                         <small>{{ item['RecordCount'] }}</small>
                                     </td>
                                     <td>
-                                        <small>{{ checkNS(item['domainName']) }}</small>
+                                        <small v-html="checkNS(item['DomainName'])"></small>
                                     </td>
                                     <td>
                                         <small>{{ item['VersionCode'] === "mianfei" ? '免费版' : '付费版' }}</small>

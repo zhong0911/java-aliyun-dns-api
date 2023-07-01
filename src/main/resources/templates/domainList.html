@@ -57,7 +57,7 @@
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tbody" v-for="item in domains">
+                                <tbody id="tbody" v-for="item in domainsInfo">
                                 <tr :id="item['DomainName'].replace('.', '-_')">
                                     <td><a class="text-decoration-none"
                                            :href="'/dns/record/' + item['DomainName']"><small>{{ item['DomainName']}}</small></a>
@@ -69,7 +69,7 @@
                                         <small>{{ item['RecordCount'] }}</small>
                                     </td>
                                     <td>
-                                        <small>{{ item['DnsServers']['DnsServer'] }}</small>
+                                        <small>{{ checkNS(item['domainName']) }}</small>
                                     </td>
                                     <td>
                                         <small>{{ item['VersionCode'] === "mianfei" ? '免费版' : '付费版' }}</small>

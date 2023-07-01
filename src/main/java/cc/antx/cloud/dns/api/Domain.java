@@ -1,11 +1,14 @@
 package cc.antx.cloud.dns.api;
 
 import cc.antx.cloud.dns.utils.Output;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.alidns20150109.Client;
 import com.aliyun.alidns20150109.models.*;
 import com.aliyun.tea.TeaException;
 import com.aliyun.teautil.models.RuntimeOptions;
+
+import java.util.Map;
 
 public class Domain {
     /**
@@ -131,5 +134,16 @@ public class Domain {
         } catch (Exception exception) {
             return Output.error(500, "ServerError", "Server Error");
         }
+    }
+
+    public static JSONArray describeDomainsOnly(JSONObject params) {
+        JSONObject domains = describeDomains(params);
+        JSONArray array = domains.getJSONObject("info").getJSONObject("Domains").getJSONArray("Domain");
+        JSONArray result = new JSONArray();
+        for (Object obj : array) {
+            JSONObject info = new JSONObject((Map<String, Object>) obj);
+            result.add(info.getString("DomainName"));
+        }
+        return result;
     }
 }

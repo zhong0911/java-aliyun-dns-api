@@ -28,9 +28,9 @@ public class DNSDomainMapper {
             dns = new DNSDomain();
             dns.setUserId(userId);
             while (rs.next()) {
-                JSONObject info = new JSONObject();
-                info.put("dns_domain_id", rs.getInt("dns_domain_id"));
-                info.put("domain_name", rs.getString("domain_name"));
+                JSONObject info = new JSONObject(true);
+                info.put("DnsDomainId", rs.getInt("dns_domain_id"));
+                info.put("DomainName", rs.getString("domain_name"));
                 domains.add(info);
             }
             dns.setDomains(domains);

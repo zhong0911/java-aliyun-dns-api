@@ -1,14 +1,29 @@
-let domains = describeDomains({});
-domains = domains['success'] ? domains['info']['Domains']['Domain'] : {};
+let domainsInfo = describeDomains({});
+domainsInfo = domainsInfo['success'] ? domainsInfo['info']['Domains']['Domain'] : {};
 
+let ns;
+let domains = [];
+if (domainsInfo !== {}) {
+    for (let i in domainsInfo) {
+        domains[i] = domainsInfo[i]['DomainName'];
+
+    }
+}
 
 const App = {
     data() {
         return {
-            domains: domains,
+            domainsInfo: domainsInfo,
+            ns: ns
         }
     },
     methods: {
+        checkNS(domainName) {
+            let res = describeDomainNs({domainName: domainName});
+            let expectDnsServers = res['ExpectDnsServers']['ExpectDnsServer'];
+            let dnsServers = res['DnsServers']['DnsServers'];
+            return expectDnsServers === dnsServers
+        },
         checkDomain() {
             checkDomain();
         },

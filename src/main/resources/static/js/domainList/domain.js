@@ -10,8 +10,13 @@ function deleteDomain(params) {
     return postAPI("deleteDomain", params);
 }
 
+function describeDomainNs(params) {
+    return postAPI("describeDomainNs", params);
+}
+
 
 let _result = {};
+
 function postAPI(action, params) {
     params.action = action;
     $.ajax({

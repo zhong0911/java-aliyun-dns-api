@@ -1,19 +1,19 @@
 package cc.antx.cloud.dns.entity;
 
 public class Account {
-    private int id;
+    private int uid;
     private String username;
     private String password;
     private String salt;
     private String email;
     private String phone;
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {

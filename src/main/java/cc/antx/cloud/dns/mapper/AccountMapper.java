@@ -4,10 +4,9 @@ import cc.antx.cloud.dns.entity.Account;
 
 import java.sql.*;
 
+import static cc.antx.cloud.dns.mapper.Configuration.*;
+
 public class AccountMapper {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/cloud";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "12345678";
 
     public static Account getAccountByUsername(String username) {
         Connection conn = null;
@@ -24,7 +23,7 @@ public class AccountMapper {
 
             if (rs.next()) {
                 account = new Account();
-                account.setId(rs.getInt("id"));
+                account.setUid(rs.getInt("uid"));
                 account.setUsername(rs.getString("username"));
                 account.setPassword(rs.getString("password"));
                 account.setSalt(rs.getString("salt"));

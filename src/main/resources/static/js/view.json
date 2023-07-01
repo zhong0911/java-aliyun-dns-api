@@ -1,0 +1,169 @@
+{
+  "success": true,
+  "status": 200,
+  "message": "Operation succeeded",
+  "info": {
+    "Domains": {
+      "Domain": [
+        {
+          "AliDomain": false,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "mail.antx.cc",
+          "CreateTime": "2023-06-22T13:27Z",
+          "PunyCode": "mail.antx.cc",
+          "DnsServers": {
+            "DnsServer": [
+              "ns1.alidns.com",
+              "ns2.alidns.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "99d50c5756734d93953144eefe047c24",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1687440453000,
+          "RecordCount": 7,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": false,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "5201314.space",
+          "CreateTime": "2023-05-28T09:03Z",
+          "PunyCode": "5201314.space",
+          "DnsServers": {
+            "DnsServer": [
+              "ns1.alidns.com",
+              "ns2.alidns.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "1dbb04f4ac48416598214d90ef57b5a7",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1685264614000,
+          "RecordCount": 6,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": false,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "antxdns.top",
+          "CreateTime": "2023-05-09T10:28Z",
+          "PunyCode": "antxdns.top",
+          "DnsServers": {
+            "DnsServer": [
+              "ns1.alidns.com",
+              "ns2.alidns.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "85b452c52fb242b395d76524be23ca8b",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1683628106000,
+          "RecordCount": 6,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": false,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "antxcdn.top",
+          "CreateTime": "2023-05-07T11:29Z",
+          "PunyCode": "antxcdn.top",
+          "DnsServers": {
+            "DnsServer": [
+              "ns1.alidns.com",
+              "ns2.alidns.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "492cd8090a8d43d7807c92f4915c141e",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1683458995000,
+          "RecordCount": 6,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": false,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "zhongjiahao.xyz",
+          "CreateTime": "2023-05-07T09:56Z",
+          "PunyCode": "zhongjiahao.xyz",
+          "DnsServers": {
+            "DnsServer": [
+              "ns1.alidns.com",
+              "ns2.alidns.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "3f5efd21f0974c919b8bba1a2089521a",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1683453398000,
+          "RecordCount": 6,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": true,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "antx.cc",
+          "CreateTime": "2023-04-27T13:36Z",
+          "PunyCode": "antx.cc",
+          "DnsServers": {
+            "DnsServer": [
+              "dns21.hichina.com",
+              "dns22.hichina.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "3ec231ff87c64167951b2dbad14823ae",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1682602600000,
+          "RecordCount": 30,
+          "Tags": {
+            "Tag": []
+          }
+        },
+        {
+          "AliDomain": true,
+          "ResourceGroupId": "rg-acfmxwbluewx72q",
+          "DomainName": "rwx.asia",
+          "CreateTime": "2023-04-21T14:43Z",
+          "PunyCode": "rwx.asia",
+          "DnsServers": {
+            "DnsServer": [
+              "dns9.hichina.com",
+              "dns10.hichina.com"
+            ]
+          },
+          "Starmark": false,
+          "VersionCode": "mianfei",
+          "DomainId": "4c363cd47fd44b0eace7a2f32cde59a6",
+          "VersionName": "Alibaba Cloud DNS",
+          "CreateTimestamp": 1682088209000,
+          "RecordCount": 8,
+          "Tags": {
+            "Tag": []
+          }
+        }
+      ]
+    },
+    "TotalCount": 7,
+    "PageSize": 20,
+    "RequestId": "97D0EC3D-BD43-5C6B-A6F8-A22419E3B65A",
+    "PageNumber": 1
+  }
+}

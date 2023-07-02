@@ -26,164 +26,145 @@
     <link href="/static/css/common.css" rel="stylesheet">
 </head>
 <body>
-<div id="app" v-cloak>
+<div id="app">
     <header></header>
-    <main class="vertical-nav">
-        <div class="container mt-3">
-            <nav class="">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#domains">域名解析</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="tab-content">
-                <div id="domains" class="mt-3 tab-pane active">
-                    <div class="mt-3">
-                        <h2>域名解析</h2>
-                        <div class="mt-4" id="options">
-                            <button @click="addDomain" class="btn btn-sm btn-primary" id="add-domain">添加域名</button>
-                        </div>
-                        <div class="table-responsive mt-2">
-                            <table class="table small table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>域名</th>
-                                    <th>标签</th>
-                                    <th>记录数</th>
-                                    <th>DNS服务器地址</th>
-                                    <th>付费版本</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody id="tbody" v-for="item in domainsInfo">
-                                <tr :id="item['DomainName'].replace('.', '-_')">
-                                    <td><a class="text-decoration-none"
-                                           :href="'/dns/record/' + item['DomainName']"><small>{{ item['DomainName']}}</small></a>
-                                    </td>
-                                    <td>
-                                        <small><a class="text-decoration-none" href="javascript:void(0)"><img
-                                                src="https://image.antx.cc/svg/tag.svg" alt="" width="16"
-                                                height="16"></a></small>
-                                    </td>
-                                    <td>
-                                        <small>{{ item['RecordCount'] }}</small>
-                                    </td>
-                                    <td>
-                                        <small v-html="checkNS(item['DomainName'])"></small>
-                                    </td>
-                                    <td>
-                                        <small>{{ item['VersionCode'] === "mianfei" ? '免费版' : '付费版' }}</small>
-                                    </td>
-                                    <td>
-                                        <a class="text-decoration-none small"
-                                           :href="'/dns/record/' + item['DomainName']">解析设置</a> |
-                                        <a class="text-decoration-none small" href="javascript:void(0)"
-                                           onclick="">域名检测</a> |
-                                        <a class="text-decoration-none small link dropdown-toggle" type="button"
-                                           data-bs-toggle="dropdown"><small>更多</small></a>
-                                        <div class="dropdown-menu">
-                                            <a class="text-decoration-none dropdown-item link small"
-                                               href="javascript:void(0)"
-                                               @click="upgradeDomain(item['DomainName'])"><small>升级</small></a>
-                                            <a class="text-decoration-none dropdown-item link small"
-                                               href="javascript:void(0)"
-                                               @click="deleteDomain(item['DomainName'])"><small>删除</small></a>
+    <main class="container">
+        <div id="domains" class="mt-3 tab-pane active">
+            <div class="mt-3">
+                <h2>域名解析</h2>
+                <div class="mt-4" id="options">
+                    <button @click="addDomain" class="btn btn-sm btn-primary" id="add-domain">添加域名</button>
+                </div>
+                <div class="mt-2">
+                    <table class="table small table-hover">
+                        <thead>
+                        <tr>
+                            <th>域名</th>
+                            <th>标签</th>
+                            <th>记录数</th>
+                            <th>DNS服务器地址</th>
+                            <th>付费版本</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody" v-cloak>
+                        <tr v-for="item in domainsInfo" :id="item['DomainName'].replace('.', '-_')">
+                            <td><a class="text-decoration-none"
+                                   :href="'/dns/record/' + item['DomainName']"><small>{{ item['DomainName']}}</small></a>
+                            </td>
+                            <td>
+                                <small><a class="text-decoration-none" href="javascript:void(0)"><img
+                                        src="https://image.antx.cc/svg/tag.svg" alt="" width="16"
+                                        height="16"></a></small>
+                            </td>
+                            <td>
+                                <small>{{ item['RecordCount'] }}</small>
+                            </td>
+                            <td>
+                                <small v-html="checkNS(item['DomainName'])"></small>
+                            </td>
+                            <td>
+                                <small>{{ item['VersionCode'] === "mianfei" ? '免费版' : '付费版' }}</small>
+                            </td>
+                            <td>
+                                <a class="text-decoration-none small"
+                                   :href="'/dns/record/' + item['DomainName']">解析设置</a> |
+                                <a class="text-decoration-none small" href="javascript:void(0)"
+                                   onclick="">域名检测</a> |
+                                <a class="text-decoration-none small link dropdown-toggle" type="button"
+                                   data-bs-toggle="dropdown"><small>更多</small></a>
+                                <div class="dropdown-menu">
+                                    <a class="text-decoration-none dropdown-item link small"
+                                       href="javascript:void(0)"
+                                       @click="upgradeDomain(item['DomainName'])"><small>升级</small></a>
+                                    <a class="text-decoration-none dropdown-item link small"
+                                       href="javascript:void(0)"
+                                       @click="deleteDomain(item['DomainName'])"><small>删除</small></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <!--tfoot class="small">
+                        <tr>
+                            <td colspan="6">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex">
+                                        <button class="btn btn-ruted btn-sm">删除</button>
+                                        <button class="btn btn-ruted btn-sm">更换分组</button>
+                                    </div>
+                                    <div class="ml-3">
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot-->
+                    </table>
+                </div>
+                <div id="other">
+                    <div id="add-domain-modal-div">
+                        <div class="modal-wrapper">
+                            <div class="modal fade small" id="add-domain-modal">
+                                <div class="modal-dialog modal-dialog-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">添加域名</h6>
+                                            <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
                                         </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="pull-right">
-                            <ul class="pagination pagination-sm">
-                                <li class="page-item" id="previous-page">
-                                    <a class="page-link link" href="javascript:void(0)">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link link" href="">...</a></li>
-                                <li class="page-item" id="next-page">
-                                    <a class="page-link link" href="javascript:void(0)">
-                                        <i class="fa fa-angle-right">
-                                        </i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <label for="pageSize">
-                            </label><select class="form-select form-select-sm" id="pageSize">
-                            <option id="page-10" value="page-10">10条/页</option>
-                            <option id="page-20" value="page-20">20条/页</option>
-                            <option id="page-50" value="page-50">50条/页</option>
-                            <option id="page-100" value="page-100">100条/页</option>
-                            <option id="page-500" value="page-500">500条/页</option>
-                        </select>
-                        </div>
-                        <div id="other">
-                            <div id="add-domain-modal-div">
-                                <div class="modal-wrapper">
-                                    <div class="modal fade small" id="add-domain-modal">
-                                        <div class="modal-dialog modal-dialog-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h6 class="modal-title">添加域名</h6>
-                                                    <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
+                                        <div class="modal-body">
+                                            <form action="" id="add-record-form">
+                                                <div class="small">
+                                                    <label for="input-domain-name">支持添加主域或子域</label>
+                                                    <input id="input-domain-name"
+                                                           class="mt-2 form-control form-control-sm"
+                                                           placeholder="请输入域名, 例如: cloud.antx.cc"
+                                                           value="" @keyup="checkDomain">
+                                                    <small id="input-domain-name-error"
+                                                           class="form-text error"></small>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <form action="" id="add-record-form">
-                                                        <div class="small">
-                                                            <label for="input-domain-name">支持添加主域或子域</label>
-                                                            <input id="input-domain-name"
-                                                                   class="mt-2 form-control form-control-sm"
-                                                                   placeholder="请输入域名, 例如: cloud.antx.cc"
-                                                                   value="" @keyup="checkDomain">
-                                                            <small id="input-domain-name-error"
-                                                                   class="form-text error"></small>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer small">
-                                                    <button type="button" class="btn btn-sm btn-light"
-                                                            data-bs-dismiss="modal">取消
-                                                    </button>
-                                                    <input id="add-domain-btn" type="button"
-                                                           class="btn btn-sm btn-primary" value="确定"
-                                                           @click="submitAddDomain">
-                                                </div>
-                                            </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer small">
+                                            <button type="button" class="btn btn-sm btn-light"
+                                                    data-bs-dismiss="modal">取消
+                                            </button>
+                                            <button id="add-domain-btn" type="button" class="btn btn-sm btn-primary"
+                                                    @click="submitAddDomain">确定
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="delete-domain-modal-div">
-                                <div class="">
-                                    <div class="modal fade" id="delete-domain-modal">
-                                        <div class="modal-dialog modal-dialog-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h6 class="modal-title">删除域名提示</h6>
-                                                    <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div>
-                                                        <span id="delete-domain-name-text"></span><br/>
-                                                        <p class="small">
-                                                            确认删除此域名？<br/>
-                                                            <span class="text-danger">删除域名，解析记录会同步删除，且无法恢复。</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer small">
-                                                    <button type="button" class="btn btn-sm btn-light"
-                                                            data-bs-dismiss="modal">取消
-                                                    </button>
-                                                    <input id="delete-domain-btn" type="button"
-                                                           class="btn btn-sm btn-primary" @click="submitDeleteDomain"
-                                                           value="确定">
-                                                </div>
+                        </div>
+                    </div>
+                    <div id="delete-domain-modal-div">
+                        <div class="">
+                            <div class="modal fade" id="delete-domain-modal">
+                                <div class="modal-dialog modal-dialog-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title">删除域名提示</h6>
+                                            <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <span id="delete-domain-name-text"></span><br/>
+                                                <p class="small">
+                                                    确认删除此域名？<br/>
+                                                    <span class="text-danger">删除域名，解析记录会同步删除，且无法恢复。</span>
+                                                </p>
                                             </div>
+                                        </div>
+                                        <div class="modal-footer small">
+                                            <button type="button" class="btn btn-sm btn-light"
+                                                    data-bs-dismiss="modal">取消
+                                            </button>
+                                            <button id="delete-domain-btn" type="button" class="btn btn-sm btn-primary"
+                                                    @click="submitDeleteDomain">确定
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

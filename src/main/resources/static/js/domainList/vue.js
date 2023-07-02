@@ -40,16 +40,8 @@ const App = {
         submitAddDomain() {
             let res = submitAddDomain();
             if (res) {
-                this.domainInfo = ({
-                    DomainName: res['domainName'],
-                    Tags: {Tag: []},
-                    RecordCount: 0,
-                    DnsServers: {DnsServer: []},
-                    VersionCode: "mianfei"
-                });
-                $("#tbody").prepend(getTableRow(this.domainInfo))
-            }
 
+            }
         },
         deleteDomain(domainName) {
             $("#delete-domain-name-text").text(domainName);
@@ -82,10 +74,12 @@ function checkDomain() {
 
 function submitAddDomain() {
     if (checkDomain()) {
+        $("#add-domain-btn").html("<span class='spinner-border spinner-border-sm'></span> 确定");
         let domainName = $("#input-domain-name").val();
         let data = addDomain({domainName: domainName});
         if (data['success']) {
             $prompt.success("添加成功");
+            $("#add-domain-btn").html("确定");
             $("#add-domain-modal").modal("hide");
             return {success: true, domainName: domainName};
         } else {
@@ -111,20 +105,24 @@ function submitAddDomain() {
             }
             if (html) $("#input-domain-name-error").html(`${error} ${html}`);
             else $prompt.error(`添加失败, 原因: ${data['message']}, Code: ${data['code']}`);
+            $("#add-domain-btn").html("确定");
             return {success: false, domainName: domainName};
         }
     }
 }
 
 function submitDeleteDomain() {
+    $("#delete-domain-btn").html("<span class='spinner-border spinner-border-sm'></span> 确定");
     let domainName = $("#delete-domain-name-text").text();
     let data = deleteDomain({domainName: domainName});
     if (data['success']) {
         $prompt.success('删除成功');
-        $("#" + domainName.replace(".", "-_")).remove();
+        $("#delete-domain-btn").html("确定");
         $("#delete-domain-modal").modal('hide');
+        $("#" + domainName.replace(".", "-_")).remove();
     } else {
         $prompt.error('删除失败');
+        $("#delete-domain-btn").html("确定");
     }
 }
 
@@ -142,18 +140,40 @@ function getTableRow(domainInfo) {
     console.log(domainInfo);
     return `
     <tr id="${domainInfo['DomainName'].replace('.', '-_')}">
-      <td><a class="text-decoration-none" href="/dns/record/${domainInfo['DomainName']}"><small>${domainInfo['DomainName']}</small></a></td>
-      <td><small><a class="text-decoration-none" href="javascript:void(0)"><img src="https://image.antx.cc/svg/tag.svg" alt="" width="16" height="16"></a></small></td>
-      <td><small>${domainInfo['RecordCount']}</small></td>
-      <td><small v-html="checkNS(domainInfo['DomainName'])"></small></td>
-      <td><small>${domainInfo['VersionCode'] === "mianfei" ? '免费版' : '付费版'}</small></td>
+      <td>
+        <a class="text-decoration-none" href="/dns/record/${domainInfo['DomainName']}">
+          <small>${domainInfo['DomainName']}</small>
+        </a>
+      </td>
+      <td>
+        <small>
+          <a class="text-decoration-none" href="javascript:void(0)">
+            <img src="https://image.antx.cc/svg/tag.svg" alt="" width="16" height="16">
+          </a>
+        </small>
+      </td>
+      <td>
+        <small>${domainInfo['RecordCount']}</small>
+      </td>
+      <td>
+        <small v-html="checkNS(domainInfo['DomainName'])"></small>
+      </td>
+      <td>
+        <small>${domainInfo['VersionCode'] === "mianfei" ? '免费版' : '付费版'}</small>
+      </td>
       <td>
         <a class="text-decoration-none small" href="/dns/record/${domainInfo['DomainName']}">解析设置</a> |
         <a class="text-decoration-none small" href="javascript:void(0)" onclick="">域名检测</a> |
-        <a class="text-decoration-none small link dropdown-toggle" type="button" data-bs-toggle="dropdown"><small>更多</small></a>
+        <a class="text-decoration-none small link dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <small>更多</small>
+        </a>
         <div class="dropdown-menu">
-          <a class="text-decoration-none dropdown-domainInfo link small" href="javascript:void(0)" @click="upgradeDomain(${domainInfo['DomainName']})"><small>升级</small></a>
-          <a class="text-decoration-none dropdown-domainInfo link small" href="javascript:void(0)" @click="deleteDomain(domainInfo['DomainName'])"><small>删除</small></a>
+          <a class="text-decoration-none dropdown-domainInfo link small" href="javascript:void(0)" @click="upgradeDomain(domainInfo['DomainName'])">
+            <small>升级</small>
+          </a>
+          <a class="text-decoration-none dropdown-domainInfo link small" href="javascript:void(0)" @click="deleteDomain(domainInfo['DomainName'])">
+            <small>删除</small>
+          </a>
         </div>
       </td>
     </tr>
